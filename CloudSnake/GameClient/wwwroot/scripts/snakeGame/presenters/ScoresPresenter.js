@@ -1,17 +1,21 @@
 ﻿define(
-	'snakeGame/presenters/ScoresPresenter',
-	['snakeGame/managers/ScoresManager'],
-	function (scoresManager) {
+    'snakeGame/presenters/ScoresPresenter',
+    ['snakeGame/managers/ScoresManager'],
+    function (scoresManager) {
 
-		function ScoresPresenter(scoresView, viewActivator) {
+        function ScoresPresenter(scoresView, viewActivator) {
 
-			scoresView.quitButtonClickHandler = function () {
-				viewActivator.activateMenuView();
-			};
+            scoresView.quitButtonClickHandler = function () {
+                viewActivator.activateMenuView();
+            };
 
-			scoresManager.getRecords().forEach(scoresView.renderRecord);
-		}
+            scoresManager
+                .getRecords()
+                .then(function (records) {
+                    records.forEach(scoresView.renderRecord);
+                });
+        }
 
-		return ScoresPresenter;
-	}
+        return ScoresPresenter;
+    }
 );
