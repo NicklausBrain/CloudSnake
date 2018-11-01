@@ -10,8 +10,8 @@ namespace GameDomain
             this.Date = date;
         }
 
-        public uint Value { get; }
+        public uint Value { get; set; }
 
-        public DateTimeOffset Date { get; }
+        public DateTimeOffset Date { get; set; }
     }
 }

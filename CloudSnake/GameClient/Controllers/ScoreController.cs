@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Contracts;
 using GameDomain;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.ServiceFabric.Services.Client;
+using Microsoft.ServiceFabric.Services.Remoting.Client;
 
 namespace GameClient.Controllers
 {
@@ -11,18 +14,27 @@ namespace GameClient.Controllers
     [ApiController]
     public class ScoreController : ControllerBase
     {
-        private static List<Score> scores = new List<Score>();
+        private readonly IGameDataService gameData;
+
+        public ScoreController()
+        {
+            this.gameData = ServiceProxy.Create<IGameDataService>(
+                new Uri("fabric:/CloudSnake/GameData"),
+                new ServicePartitionKey(0));
+        }
 
         [HttpGet]
-        public IEnumerable<Score> Get()
+        public async Task<IEnumerable<Score>> Get()
         {
-            return scores;
+            var res =await this.gameData.GetScores();
+
+            return res.AsEnumerable();
         }
 
         [HttpPost]
-        public void Post(Score score)
+        public async Task Post(Score score)
         {
-            scores.Add(score);
+            await this.gameData.AddScore(score);
         }
     }
 }

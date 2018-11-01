@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Fabric;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Contracts;
 using GameDomain;
 using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
+using Microsoft.ServiceFabric.Services.Remoting.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 
 namespace GameData
@@ -15,7 +15,7 @@ namespace GameData
     /// <summary>
     /// An instance of this class is created for each service replica by the Service Fabric runtime.
     /// </summary>
-    internal sealed class GameData : StatefulService
+    internal sealed class GameData : StatefulService, IGameDataService
     {
         public GameData(StatefulServiceContext context)
             : base(context)
@@ -24,11 +24,16 @@ namespace GameData
 
         public async Task<IEnumerable<Score>> GetScores()
         {
-            var store = await this.StateManager.GetOrAddAsync<IReliableDictionary<Guid, IEnumerable<Score>>>(new Uri("scores"));
+            var store = await this.StateManager.GetOrAddAsync<IReliableDictionary<Guid, IEnumerable<Score>>>("scores");
+
+            var userId = Guid.Parse("a4d5a1d0-c034-4234-91d0-4e19d40ad294");
 
             using (var tr = this.StateManager.CreateTransaction())
             {
-                var scores = await store.GetOrAddAsync(tr, Guid.Empty, Enumerable.Empty<Score>());
+                var scores = await store.GetOrAddAsync(
+                    tx: tr,
+                    key: userId,
+                    value: new Score[0]);
 
                 return scores;
             }
@@ -36,15 +41,19 @@ namespace GameData
 
         public async Task AddScore(Score score)
         {
-            var store = await this.StateManager.GetOrAddAsync<IReliableDictionary<Guid, IEnumerable<Score>>>(new Uri("scores"));
+            var store = await this.StateManager.GetOrAddAsync<IReliableDictionary<Guid, IEnumerable<Score>>>("scores");
+
+            var userId = Guid.Parse("a4d5a1d0-c034-4234-91d0-4e19d40ad294");
 
             using (var tr = this.StateManager.CreateTransaction())
             {
                 await store.AddOrUpdateAsync(
-                    tr,
-                    Guid.Empty,
-                    guid => new[] { score },
-                    (guid, enumerable) => enumerable.Append(score));
+                    tx: tr,
+                    key: userId,
+                    addValueFactory: guid => new[] { score },
+                    updateValueFactory: (guid, enumerable) => enumerable.Append(score).ToArray());
+
+                await tr.CommitAsync();
             }
         }
 
@@ -57,39 +66,7 @@ namespace GameData
         /// <returns>A collection of listeners.</returns>
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {
-            return new ServiceReplicaListener[0];
+            return this.CreateServiceRemotingReplicaListeners();
         }
-
-      
-        //protected override async Task RunAsync(CancellationToken cancellationToken)
-        //{
-        // TODO: Replace the following sample code with your own logic 
-        //       or remove this RunAsync override if it's not needed in your service.
-
-        //_repo = new ServiceFabricProductRepository(this.StateManager);
-
-        //var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
-
-        //while (true)
-        //{
-        //    cancellationToken.ThrowIfCancellationRequested();
-
-        //    using (var tx = this.StateManager.CreateTransaction())
-        //    {
-        //        var result = await myDictionary.TryGetValueAsync(tx, "Counter");
-
-        //        ServiceEventSource.Current.ServiceMessage(this.Context, "Current Counter Value: {0}",
-        //            result.HasValue ? result.Value.ToString() : "Value does not exist.");
-
-        //        await myDictionary.AddOrUpdateAsync(tx, "Counter", 0, (key, value) => ++value);
-
-        //        // If an exception is thrown before calling CommitAsync, the transaction aborts, all changes are 
-        //        // discarded, and nothing is saved to the secondary replicas.
-        //        await tx.CommitAsync();
-        //    }
-
-        //    await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
-        //}
-        //}
     }
 }

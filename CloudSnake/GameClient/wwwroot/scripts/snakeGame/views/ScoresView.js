@@ -1,42 +1,42 @@
 ﻿define(
-	'snakeGame/views/ScoresView',
-	[],
-	function () {
+    'snakeGame/views/ScoresView',
+    [],
+    function () {
 
-		function ScoresView(
-			scoresScreen,
-			quitButton) {
-			var self = this;
-			var nextRecordOffset = 4;
+        function ScoresView(
+            scoresScreen,
+            quitButton) {
+            var self = this;
+            var nextRecordOffset = 4;
 
-			this.quitButtonClickHandler = null;
+            this.quitButtonClickHandler = null;
 
-			quitButton.addEventListener('click', function () {
-				self.quitButtonClickHandler();
-			});
+            quitButton.addEventListener('click', function () {
+                self.quitButtonClickHandler();
+            });
 
-			function htmlToElement(html) {
-				var template = document.createElement('template');
-				template.innerHTML = html;
-				return template.content.firstChild;
-			}
+            function htmlToElement(html) {
+                var template = document.createElement('template');
+                template.innerHTML = html;
+                return template.content.firstChild;
+            }
 
-			this.renderRecord = function (record) {
-				var recordHtml =
-					'<div id="scoresButton" class="scoreItem" style="top:' + nextRecordOffset + 'rem">' +
-						'<div>' + record.value + ': ' + record.date + '</div>' +
-					'</div>';
-				
-				nextRecordOffset += 2;
+            this.renderRecord = function (record) {
+                var recordHtml =
+                    '<div id="scoresButton" class="scoreItem" style="top:' + nextRecordOffset + 'rem">' +
+                    '<div>' + record.value + ': ' + new Date(Date.parse(record.date)).toLocaleString() + '</div>' +
+                    '</div>';
 
-				scoresScreen.appendChild(htmlToElement(recordHtml));
-			};
+                nextRecordOffset += 2;
 
-			this.activate = function () {
+                scoresScreen.appendChild(htmlToElement(recordHtml));
+            };
 
-			};
-		}
+            this.activate = function () {
 
-		return ScoresView;
-	}
+            };
+        }
+
+        return ScoresView;
+    }
 );

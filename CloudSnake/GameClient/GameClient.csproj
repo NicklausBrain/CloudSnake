@@ -18,7 +18,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Contracts\Contracts.csproj" />
     <ProjectReference Include="..\GameDomain\GameDomain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.ServiceFabric.Services.Remoting">
+      <HintPath>C:\Users\nikolay.mozgovoy\.nuget\packages\microsoft.servicefabric.services.remoting\3.2.187\lib\netstandard2.0\Microsoft.ServiceFabric.Services.Remoting.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
