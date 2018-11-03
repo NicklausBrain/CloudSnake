@@ -2,7 +2,6 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace GameClient
 {
@@ -20,12 +19,20 @@ namespace GameClient
                 // When Service Fabric creates an instance of this service type,
                 // an instance of the class is created in this host process.
 
-                ServiceRuntime.RegisterServiceAsync("GameClientType",
-                    context => new GameClient(context)).GetAwaiter().GetResult();
+                ServiceRuntime
+                    .RegisterServiceAsync(
+                        "GameClientType",
+                        context => new GameClient(context))
+                    .GetAwaiter()
+                    .GetResult();
 
-                ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(GameClient).Name);
+                ServiceEventSource
+                    .Current
+                    .ServiceTypeRegistered(
+                        hostProcessId: Process.GetCurrentProcess().Id,
+                        serviceType: typeof(GameClient).Name);
 
-                // Prevents this host process from terminating so services keeps running. 
+                // Prevents this host process from terminating so services keeps running.
                 Thread.Sleep(Timeout.Infinite);
             }
             catch (Exception e)

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameClient.Controllers
@@ -12,7 +10,7 @@ namespace GameClient.Controllers
     public class GameDataController : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<int> Score()
+        public IEnumerable<int> Test()
         {
             return Enumerable.Range(0, 100);
         }

@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GameClient.Authentication;
+﻿using GameClient.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using Microsoft.IdentityModel.Tokens;
 
 namespace GameClient
 {
@@ -23,15 +15,17 @@ namespace GameClient
         }
 
         public IConfiguration Configuration { get; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(sharedOptions =>
-            {
-                sharedOptions.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddAzureAdBearer(options =>
+            services
+                .AddAuthentication(options =>
+                {
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddAzureAdBearer(options =>
                 {
                     options.ClientId = "352a9497-51a7-4712-8512-4b0a3454e38e";
                     options.ClientSecret = "/O$}=i@X)3J)[w=I;*Z=W9*./1&(WyZ#Bw/&&8C&$";
@@ -51,14 +45,7 @@ namespace GameClient
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync("Hello World!");
-            //});
-
-            //app.UseHttpsRedirection();
             app.UseStaticFiles();
-            //app.useo
             app.UseAuthentication();
             app.UseMvc();
         }
