@@ -1,18 +1,18 @@
 ﻿define(
-	'snakeGame/common/Direction',
-	[],
-	function () {
+    'snakeGame/common/Direction',
+    [],
+    function () {
 
-		var Direction = {
-			Up: 1,
-			Down: -1,
-			Left: 2,
-			Right: -2,
-			areOpposite: function (directionA, directionB) {
-				return directionA === -directionB;
-			}
-		};
+        var Direction = {
+            Up: 1,
+            Down: -1,
+            Left: 2,
+            Right: -2,
+            areOpposite: function (directionA, directionB) {
+                return directionA === -directionB;
+            }
+        };
 
-		return Direction;
-	}
+        return Direction;
+    }
 );

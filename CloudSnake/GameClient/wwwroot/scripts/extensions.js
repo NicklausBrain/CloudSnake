@@ -70,7 +70,7 @@ function postData(url = '', data = {}, headers) {
             //},
             redirect: "follow", // manual, *follow, error
             referrer: "no-referrer", // no-referrer, *client
-            body: JSON.stringify(data), // body data type must match "Content-Type" header
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
         })
         .then(response => response.json()); // parses response to JSON
 }

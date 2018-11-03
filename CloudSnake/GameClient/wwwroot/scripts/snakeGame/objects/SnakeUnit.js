@@ -1,14 +1,14 @@
 ﻿define(
-	'snakeGame/objects/SnakeUnit',
-	['snakeGame/objects/GameObject'],
-	function (GameObject) {
+    'snakeGame/objects/SnakeUnit',
+    ['snakeGame/objects/GameObject'],
+    function (GameObject) {
 
-		function SnakeUnit(location, locationChangedEventHandler) {
-			SnakeUnit.super.constructor.call(this, location, locationChangedEventHandler);
-		};
+        function SnakeUnit(location, locationChangedEventHandler) {
+            SnakeUnit.super.constructor.call(this, location, locationChangedEventHandler);
+        };
 
-		SnakeUnit.extends(GameObject)
+        SnakeUnit.extends(GameObject);
 
-		return SnakeUnit;
-	}
+        return SnakeUnit;
+    }
 );

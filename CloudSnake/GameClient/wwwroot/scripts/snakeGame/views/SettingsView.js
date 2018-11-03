@@ -1,22 +1,22 @@
 ﻿define(
-	'snakeGame/views/SettingsView',
-	[],
-	function () {
+    'snakeGame/views/SettingsView',
+    [],
+    function () {
 
-		function SettingsView(quitButton) {
-			var self = this;
+        function SettingsView(quitButton) {
+            var self = this;
 
-			this.quitButtonClickHandler = null;
+            this.quitButtonClickHandler = null;
 
-			quitButton.addEventListener('click', function () {
-				self.quitButtonClickHandler();
-			});
+            quitButton.addEventListener('click', function () {
+                self.quitButtonClickHandler();
+            });
 
-			this.activate = function () {
+            this.activate = function () {
 
-			};
-		}
+            };
+        }
 
-		return SettingsView;
-	}
+        return SettingsView;
+    }
 );
