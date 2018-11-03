@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts;
+using GameClient.Authentication;
 using GameDomain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.ServiceFabric.Services.Client;
@@ -10,8 +11,9 @@ using Microsoft.ServiceFabric.Services.Remoting.Client;
 
 namespace GameClient.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [GameApiAuthorize]
+    [Route("api/[controller]")]
     public class ScoreController : ControllerBase
     {
         private readonly IGameDataService gameData;
@@ -26,7 +28,7 @@ namespace GameClient.Controllers
         [HttpGet]
         public async Task<IEnumerable<Score>> Get()
         {
-            var res =await this.gameData.GetScores();
+            var res = await this.gameData.GetScores();
 
             return res.AsEnumerable();
         }

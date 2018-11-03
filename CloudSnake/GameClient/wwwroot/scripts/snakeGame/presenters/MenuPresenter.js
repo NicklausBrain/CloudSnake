@@ -1,23 +1,29 @@
 ﻿define(
-	'snakeGame/presenters/MenuPresenter',
-	[],
-	function () {
+    'snakeGame/presenters/MenuPresenter',
+    [],
+    function () {
 
-		function MenuPresenter(menuView, viewActivator) {
+        function MenuPresenter(menuView, viewActivator) {
 
-			menuView.playButtonClickHandler = function () {
-				viewActivator.activateGameView();
-			};
+            menuView.playButtonClickHandler = function () {
+                viewActivator.activateGameView();
+            };
 
-			menuView.settingsButtonClickHandler = function () {
-				viewActivator.activateSettingsView();
-			};
+            menuView.settingsButtonClickHandler = function () {
+                viewActivator.activateSettingsView();
+            };
 
-			menuView.scoresButtonClickHandler = function () {
-				viewActivator.activateScoresView();
-			};
-		}
+            menuView.scoresButtonClickHandler = function () {
+                viewActivator.activateScoresView();
+            };
 
-		return MenuPresenter;
-	}
+            menuView.signInButtonClickHandler = function() {
+                window.clientApplication.loginPopup().then(window.onSignin);
+            };
+
+            //menuView.
+        }
+
+        return MenuPresenter;
+    }
 );

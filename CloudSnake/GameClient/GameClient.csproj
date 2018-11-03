@@ -5,6 +5,7 @@
     <IsServiceFabricServiceProject>True</IsServiceFabricServiceProject>
     <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
     <TargetLatestRuntimePatch>False</TargetLatestRuntimePatch>
+    <AssemblyName>GameClient</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
