@@ -28,14 +28,6 @@
                 self.signInButtonClickHandler();
             });
 
-            //Object.defineProperties(this, {
-            //	playButtonClickHandler: {
-            //		set: function () {
-            //			scoreLabel.textContent = 'Score: ' + (score += 10);// add string format
-            //		}
-            //	}
-            //});
-
             this.activate = function () {
 
             };

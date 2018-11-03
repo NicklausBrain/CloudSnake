@@ -1,7 +1,7 @@
 ﻿define(
     'snakeGame/presenters/MenuPresenter',
-    [],
-    function () {
+    ['snakeGame/common/Authentication'],
+    function (Authentication) {
 
         function MenuPresenter(menuView, viewActivator) {
 
@@ -17,11 +17,9 @@
                 viewActivator.activateScoresView();
             };
 
-            menuView.signInButtonClickHandler = function() {
-                window.clientApplication.loginPopup().then(window.onSignin);
+            menuView.signInButtonClickHandler = function () {
+                Authentication.loginPopup();
             };
-
-            //menuView.
         }
 
         return MenuPresenter;

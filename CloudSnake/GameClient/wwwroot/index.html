@@ -8,50 +8,10 @@
     <link type="text/css" rel="stylesheet" href="styles/font-awesome.css" />
     <!-- JavaScript-->
     <script type="text/javascript" src="scripts/extensions.js"></script>
-    <script type="text/javascript" src="https://secure.aadcdn.microsoftonline-p.com/lib/0.2.3/js/msal.min.js"></script>
+    <script type="text/javascript" src="scripts/msal.js"></script>
     <script src="scripts/require.js" data-main="scripts/app.js"></script>
 
     <script type="text/javascript">
-
-        window.clientApplication = null;
-
-        window.config = {
-            clientID: '352a9497-51a7-4712-8512-4b0a3454e38e'
-        };
-
-        function authCallback(errorDesc, token, error, tokenType) {
-            //This function is called after loginRedirect and acquireTokenRedirect. Not called with loginPopup
-            // msal object is bound to the window object after the constructor is called.
-            if (token) {
-                console.log("token:" + token);
-            }
-            else {
-                console.log(error + ":" + errorDesc);
-            }
-        }
-
-        function onSignin(idToken)
-        {
-            // Check Login Status, Update UI
-            var user = clientApplication.getUser();
-            if (user) {
-                console.log('user:' + user);
-            } else {
-                console.log('no user');
-            }
-        }
-
-        if (!clientApplication)
-        {
-            clientApplication = new Msal.UserAgentApplication(
-                window.config.clientID,
-                'https://login.microsoftonline.com/27e4fcee-63ff-47c2-9d92-fa40d44e8ba5',
-                authCallback);
-        }
-
-        //$signInButton.click(function () {
-        //    clientApplication.loginPopup().then(onSignin);
-        //});
 
     </script>
 </head>

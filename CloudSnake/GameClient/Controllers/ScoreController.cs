@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts;
-using GameClient.Authentication;
 using GameDomain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.ServiceFabric.Services.Client;
 using Microsoft.ServiceFabric.Services.Remoting.Client;
 
 namespace GameClient.Controllers
 {
+    [Authorize]
     [ApiController]
-    [GameApiAuthorize]
     [Route("api/[controller]")]
     public class ScoreController : ControllerBase
     {

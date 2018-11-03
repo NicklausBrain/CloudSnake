@@ -7,7 +7,7 @@
             var objectsByLocationDict = {
                 add: function (gameObject) {
                     var location = gameObject.getLocation();
-                    if (objectsByLocationDict[location] == undefined) {
+                    if (objectsByLocationDict[location] === undefined) {
                         objectsByLocationDict[location] = {};
                     }
                     objectsByLocationDict[location][gameObject.getId()] = gameObject;
@@ -54,7 +54,7 @@
             };
 
             this.getObjectsAt = function (location) {
-                return objectsByLocationDict[location] != undefined
+                return objectsByLocationDict[location] !== undefined
                     ? Object.values(objectsByLocationDict[location])
                     : [];
             };
