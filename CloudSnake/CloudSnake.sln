@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameDomain", "GameDomain\Ga
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{ADF224B7-EC1E-462A-94EC-82AEA1085B70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameApi", "GameApi\GameApi.csproj", "{0A9F4154-D1B3-47E2-BF45-E98FBB769850}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,14 @@ Global
 		{ADF224B7-EC1E-462A-94EC-82AEA1085B70}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ADF224B7-EC1E-462A-94EC-82AEA1085B70}.Release|x64.ActiveCfg = Release|Any CPU
 		{ADF224B7-EC1E-462A-94EC-82AEA1085B70}.Release|x64.Build.0 = Release|Any CPU
+		{0A9F4154-D1B3-47E2-BF45-E98FBB769850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A9F4154-D1B3-47E2-BF45-E98FBB769850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A9F4154-D1B3-47E2-BF45-E98FBB769850}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0A9F4154-D1B3-47E2-BF45-E98FBB769850}.Debug|x64.Build.0 = Debug|Any CPU
+		{0A9F4154-D1B3-47E2-BF45-E98FBB769850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A9F4154-D1B3-47E2-BF45-E98FBB769850}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A9F4154-D1B3-47E2-BF45-E98FBB769850}.Release|x64.ActiveCfg = Release|Any CPU
+		{0A9F4154-D1B3-47E2-BF45-E98FBB769850}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

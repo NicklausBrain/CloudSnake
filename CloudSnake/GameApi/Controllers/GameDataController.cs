@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GameClient.Controllers
+namespace GameApi.Controllers
 {
 
     [Route("api/[controller]")]

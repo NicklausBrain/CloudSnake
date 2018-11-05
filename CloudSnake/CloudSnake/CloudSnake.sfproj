@@ -32,6 +32,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GameApi\GameApi.csproj" />
     <ProjectReference Include="..\GameClient\GameClient.csproj" />
     <ProjectReference Include="..\GameData\GameData.csproj" />
   </ItemGroup>

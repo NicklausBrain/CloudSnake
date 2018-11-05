@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace GameClient.Authentication
+namespace GameApi.Authentication
 {
     public static class AzureAdServiceCollectionExtensions
     {
@@ -84,7 +84,7 @@ namespace GameClient.Authentication
 
             public void Configure(JwtBearerOptions options)
             {
-                Configure(Options.DefaultName, options);
+                this.Configure(Options.DefaultName, options);
             }
         }
     }

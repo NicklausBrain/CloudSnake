@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.ServiceFabric.Services.Client;
 using Microsoft.ServiceFabric.Services.Remoting.Client;
 
-namespace GameClient.Controllers
+namespace GameApi.Controllers
 {
     [Authorize]
     [ApiController]

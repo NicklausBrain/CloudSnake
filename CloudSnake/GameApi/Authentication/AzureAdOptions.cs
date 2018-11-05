@@ -1,4 +1,4 @@
-﻿namespace GameClient.Authentication
+﻿namespace GameApi.Authentication
 {
     public class AzureAdOptions
     {
