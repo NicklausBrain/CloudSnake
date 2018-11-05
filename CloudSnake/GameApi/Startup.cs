@@ -34,6 +34,19 @@ namespace GameApi
                     options.TenantId = "27e4fcee-63ff-47c2-9d92-fa40d44e8ba5";
                 });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                    "AllowAllOrigins",
+                    builder =>
+                    {
+                        builder
+                            .AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -51,6 +64,7 @@ namespace GameApi
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
+            app.UseCors("AllowAllOrigins");
             app.UseMvc();
         }
     }
