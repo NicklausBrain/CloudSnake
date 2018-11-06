@@ -62,8 +62,8 @@ namespace GameClient
         /// <returns>Returns the ASP .NET Core HTTPS development certificate</returns>
         private static X509Certificate2 GetCertificateFromStore()
         {
-            string aspNetCoreEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            if (string.Equals(aspNetCoreEnvironment, "Development", StringComparison.OrdinalIgnoreCase))
+            //string aspNetCoreEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            //if (string.Equals(aspNetCoreEnvironment, "Development", StringComparison.OrdinalIgnoreCase))
             {
                 const string aspNetHttpsOid = "1.3.6.1.4.1.311.84.1.1";
                 const string CNName = "CN=localhost";
@@ -76,18 +76,18 @@ namespace GameClient
                     return currentCerts.Count == 0 ? null : currentCerts[0];
                 }
             }
-            else
-            {
-                using (var store = new X509Store(StoreName.My, StoreLocation.LocalMachine))
-                {
-                    Console.WriteLine(store.Name);
+            //else
+            //{
+            //    using (var store = new X509Store(StoreName.My, StoreLocation.LocalMachine))
+            //    {
+            //        Console.WriteLine(store.Name);
 
-                    store.Open(OpenFlags.ReadOnly);
-                    var certCollection = store.Certificates;
-                    var currentCerts = certCollection.Find(X509FindType.FindByThumbprint, "0A029E2C1A1FF610F6EC490A6EE5F4A51018ED06", true);
-                    return currentCerts.Count == 0 ? null : currentCerts[0];
-                }
-            }
+            //        store.Open(OpenFlags.ReadOnly);
+            //        var certCollection = store.Certificates;
+            //        var currentCerts = certCollection.Find(X509FindType.FindByThumbprint, "0A029E2C1A1FF610F6EC490A6EE5F4A51018ED06", true);
+            //        return currentCerts.Count == 0 ? null : currentCerts[0];
+            //    }
+            //}
         }
     }
 }
