@@ -41,7 +41,7 @@ namespace GameClient
                                     int port = serviceContext.CodePackageActivationContext.GetEndpoint("ServiceEndpoint").Port;
                                     opt.Listen(IPAddress.IPv6Any, port, listenOptions =>
                                     {
-                                        listenOptions.UseHttps(GetCertificateFromStore());
+                                        //listenOptions.UseHttps(GetCertificateFromStore());
                                         listenOptions.NoDelay = true;
                                     });
                                 })
