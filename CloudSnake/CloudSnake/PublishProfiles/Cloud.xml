@@ -20,10 +20,7 @@
                                     AzureActiveDirectory="true"
                                     ServerCertThumbprint="0123456789012345678901234567890123456789" />
   -->
-  <ClusterConnectionParameters ConnectionEndpoint="cloudsnake.westeurope.cloudapp.azure.com:19000" X509Credential="true" ServerCertThumbprint="C56EAC7119521D50D2C2CDC590D692B4DF050FDA" FindType="FindByThumbprint" FindValue="C56EAC7119521D50D2C2CDC590D692B4DF050FDA" StoreLocation="CurrentUser" StoreName="My" />
+  <ClusterConnectionParameters ConnectionEndpoint="cloudsnake-prod.westeurope.cloudapp.azure.com:19000" X509Credential="true" ServerCertThumbprint="4268A8884BAF7AE8ECDF7A7FC689D6013808E82A" FindType="FindByThumbprint" FindValue="4268A8884BAF7AE8ECDF7A7FC689D6013808E82A" StoreLocation="CurrentUser" StoreName="My" />
   <ApplicationParameterFile Path="..\ApplicationParameters\Cloud.xml" />
   <CopyPackageParameters CompressPackage="true" />
-  <UpgradeDeployment Mode="Monitored" Enabled="true">
-    <Parameters FailureAction="Rollback" Force="True" ForceRestart="True" />
-  </UpgradeDeployment>
 </PublishProfile>

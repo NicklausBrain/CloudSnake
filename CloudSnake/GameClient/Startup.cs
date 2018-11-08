@@ -28,8 +28,13 @@ namespace GameClient
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseHsts();
+            }
 
             app.UseStaticFiles();
+            app.UseHttpsRedirection();
 
             // app.UseMvc();
         }
