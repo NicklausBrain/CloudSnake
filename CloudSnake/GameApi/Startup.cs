@@ -28,7 +28,6 @@ namespace GameApi
                 .AddAzureAdBearer(options =>
                 {
                     options.ClientId = "352a9497-51a7-4712-8512-4b0a3454e38e";
-                    options.ClientSecret = "/O$}=i@X)3J)[w=I;*Z=W9*./1&(WyZ#Bw/&&8C&$";
                     options.Instance = "https://login.microsoftonline.com/";
                     options.Domain = "NicklausBrainhotmail.onmicrosoft.com";
                     options.TenantId = "27e4fcee-63ff-47c2-9d92-fa40d44e8ba5";
