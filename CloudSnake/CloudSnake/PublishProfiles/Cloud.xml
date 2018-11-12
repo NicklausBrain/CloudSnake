@@ -23,4 +23,7 @@
   <ClusterConnectionParameters ConnectionEndpoint="jsnake.top:19000" X509Credential="true" ServerCertThumbprint="4268A8884BAF7AE8ECDF7A7FC689D6013808E82A" FindType="FindByThumbprint" FindValue="4268A8884BAF7AE8ECDF7A7FC689D6013808E82A" StoreLocation="CurrentUser" StoreName="My" />
   <ApplicationParameterFile Path="..\ApplicationParameters\Cloud.xml" />
   <CopyPackageParameters CompressPackage="true" />
+  <UpgradeDeployment Mode="Monitored" Enabled="true">
+    <Parameters FailureAction="Rollback" Force="True" />
+  </UpgradeDeployment>
 </PublishProfile>
