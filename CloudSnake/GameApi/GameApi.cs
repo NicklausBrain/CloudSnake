@@ -86,7 +86,7 @@ namespace GameApi
                 {
                     store.Open(OpenFlags.ReadOnly);
                     var certCollection = store.Certificates;
-                    var currentCerts = certCollection.Find(X509FindType.FindBySubjectDistinguishedName, "CN=cloudsnake-prod.westeurope.cloudapp.azure.com", false);
+                    var currentCerts = certCollection.Find(X509FindType.FindBySubjectName, "jsnake.top", false);
                     return currentCerts.Count == 0 ? null : currentCerts[0];
                 }
             }
