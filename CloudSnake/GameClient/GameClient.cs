@@ -65,16 +65,16 @@ namespace GameClient
         private static X509Certificate2 GetCertificateFromStore()
         {
             string aspNetCoreEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
             if (string.Equals(aspNetCoreEnvironment, "Development", StringComparison.OrdinalIgnoreCase))
             {
                 const string aspNetHttpsOid = "1.3.6.1.4.1.311.84.1.1";
-                const string CNName = "CN=localhost";
                 using (var store = new X509Store(StoreName.My, StoreLocation.LocalMachine))
                 {
                     store.Open(OpenFlags.ReadOnly);
                     var certCollection = store.Certificates;
                     var currentCerts = certCollection.Find(X509FindType.FindByExtension, aspNetHttpsOid, true);
-                    currentCerts = currentCerts.Find(X509FindType.FindByIssuerDistinguishedName, CNName, true);
+                    currentCerts = currentCerts.Find(X509FindType.FindByIssuerDistinguishedName, "CN=localhost", true);
                     return currentCerts.Count == 0 ? null : currentCerts[0];
                 }
             }

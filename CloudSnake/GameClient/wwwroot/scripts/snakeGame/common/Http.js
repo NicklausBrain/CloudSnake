@@ -3,7 +3,16 @@
     ['snakeGame/common/Authentication'],
     function (Authentication) {
 
-        var gameApiUrl = "https://cloud-snake-local:8505";
+        var config = {};
+
+        fetch('/api/Config')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (cfg) {
+                config = cfg;
+                config.authority = cfg.instance + cfg.tenantId;
+            });
 
         function initPostRequest(token, data) {
             return {
@@ -37,7 +46,7 @@
                 return Authentication.getToken()
                     .then(function (token) {
                         var request = initGetRequest(token);
-                        return fetch(gameApiUrl + url, request)
+                        return fetch(config.apiUrl + url, request)
                             .then(function (response) {
                                 return response.json();
                             })
@@ -50,7 +59,7 @@
                 return Authentication.getToken()
                     .then(function (token) {
                         var request = initPostRequest(token, data);
-                        return fetch(gameApiUrl + url, request)
+                        return fetch(config.apiUrl + url, request)
                             .then(function (response) {
                                 return response.json();
                             })

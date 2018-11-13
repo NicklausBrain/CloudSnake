@@ -5,45 +5,48 @@ namespace GameClient.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class ConfigController : ControllerBase
     {
         private readonly IConfiguration configuration;
 
-        public AuthController(IConfiguration configuration)
+        public ConfigController(IConfiguration configuration)
         {
             this.configuration = configuration;
         }
 
-        public object Get()
+        public Config Get()
         {
             var auth = this.configuration.GetSection("Auth");
 
-            return new AuthSettings(
+            return new Config(
                 clientId: auth["ClientId"],
                 instance: auth["Instance"],
                 domain: auth["Domain"],
-                tenantId: auth["TenantId"]);
+                tenantId: auth["TenantId"],
+                apiUrl: this.configuration["apiUrl"]);
         }
 
-        public class AuthSettings
+        public class Config
         {
-            public AuthSettings(
+            public Config(
                 string clientId,
                 string instance,
                 string domain,
-                string tenantId
-            )
+                string tenantId,
+                string apiUrl)
             {
                 this.ClientId = clientId;
                 this.Instance = instance;
                 this.Domain = domain;
                 this.TenantId = tenantId;
+                this.ApiUrl = apiUrl;
             }
 
             public string ClientId { get; }
             public string Instance { get; }
             public string Domain { get; }
             public string TenantId { get; }
+            public string ApiUrl { get; }
         }
     }
 }

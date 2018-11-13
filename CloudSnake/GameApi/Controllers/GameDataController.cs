@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GameApi.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class GameDataController : ControllerBase
