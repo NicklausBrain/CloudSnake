@@ -7,7 +7,9 @@ using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
@@ -38,24 +40,26 @@ namespace GameApi
                     {
                         ServiceEventSource.Current.ServiceMessage(serviceContext, $"Starting Kestrel on {url}");
 
-                        return new WebHostBuilder()
-                                    .UseKestrel(opt =>
+                        return
+                            WebHost
+                                .CreateDefaultBuilder()
+                                .UseKestrel(opt =>
+                                {
+                                    int port = serviceContext.CodePackageActivationContext.GetEndpoint("ServiceEndpoint").Port;
+                                    opt.Listen(IPAddress.IPv6Any, port, listenOptions =>
                                     {
-                                        int port = serviceContext.CodePackageActivationContext.GetEndpoint("ServiceEndpoint").Port;
-                                        opt.Listen(IPAddress.IPv6Any, port, listenOptions =>
-                                        {
-                                            listenOptions.UseHttps(GetCertificateFromStore());
-                                            listenOptions.NoDelay = true;
-                                        });
-                                    })
-                                    .ConfigureServices(
-                                        services => services
-                                            .AddSingleton<StatelessServiceContext>(serviceContext))
-                                    .UseContentRoot(Directory.GetCurrentDirectory())
-                                    .UseStartup<Startup>()
-                                    .UseServiceFabricIntegration(listener, ServiceFabricIntegrationOptions.None)
-                                    .UseUrls(url)
-                                    .Build();
+                                        listenOptions.UseHttps(GetCertificateFromStore());
+                                        listenOptions.NoDelay = true;
+                                    });
+
+                                })
+                                .ConfigureServices(
+                                    services => services.AddSingleton<StatelessServiceContext>(serviceContext))
+                                .UseContentRoot(Directory.GetCurrentDirectory())
+                                .UseStartup<Startup>()
+                                .UseServiceFabricIntegration(listener, ServiceFabricIntegrationOptions.None)
+                                .UseUrls(url)
+                                .Build();
                     }))
             };
         }

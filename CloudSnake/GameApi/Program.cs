@@ -20,10 +20,16 @@ namespace GameApi
                 // When Service Fabric creates an instance of this service type,
                 // an instance of the class is created in this host process.
 
-                ServiceRuntime.RegisterServiceAsync("GameApiType",
-                    context => new GameApi(context)).GetAwaiter().GetResult();
+                ServiceRuntime
+                    .RegisterServiceAsync(
+                        "GameApiType",
+                        context => new GameApi(context))
+                    .GetAwaiter()
+                    .GetResult();
 
-                ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(GameApi).Name);
+                ServiceEventSource
+                    .Current
+                    .ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(GameApi).Name);
 
                 // Prevents this host process from terminating so services keeps running. 
                 Thread.Sleep(Timeout.Infinite);

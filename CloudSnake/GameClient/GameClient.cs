@@ -4,6 +4,7 @@ using System.Fabric;
 using System.IO;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.ServiceFabric.Services.Communication.AspNetCore;
@@ -35,7 +36,8 @@ namespace GameClient
                         ServiceEventSource.Current.ServiceMessage(serviceContext, $"Starting Kestrel on {url}");
 
                         return
-                            new WebHostBuilder()
+                            WebHost
+                                .CreateDefaultBuilder()
                                 .UseKestrel(opt =>
                                 {
                                     int port = serviceContext.CodePackageActivationContext.GetEndpoint("ServiceEndpoint").Port;

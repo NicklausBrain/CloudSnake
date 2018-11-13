@@ -20,6 +20,7 @@ namespace GameApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
             services
                 .AddAuthentication(options =>
                 {
@@ -27,10 +28,11 @@ namespace GameApi
                 })
                 .AddAzureAdBearer(options =>
                 {
-                    options.ClientId = "352a9497-51a7-4712-8512-4b0a3454e38e";
-                    options.Instance = "https://login.microsoftonline.com/";
-                    options.Domain = "NicklausBrainhotmail.onmicrosoft.com";
-                    options.TenantId = "27e4fcee-63ff-47c2-9d92-fa40d44e8ba5";
+                    var auth = this.Configuration.GetSection("Auth");
+                    options.ClientId = auth["ClientId"];
+                    options.Instance = auth["Instance"];
+                    options.Domain = auth["Domain"];
+                    options.TenantId = auth["TenantId"];
                 });
 
             services.AddCors(options =>
